@@ -1,0 +1,18 @@
+// Exemple 2 : portes unaires et mesure conditionnelle
+// Compile avec : ./quanta exemples/portes.qta
+
+qubit q0;
+qubit q1;
+bit resultat;
+
+porte_x q0;
+porte_h q0;
+porte_z q1;
+porte_y q1;
+mesurer q0 dans resultat;
+
+si (resultat == 1) alors
+  porte_x q1;
+fsi
+
+afficher resultat;

@@ -1,0 +1,14 @@
+// Exemple 1 : etat de Bell (intrication de deux qubits)
+// Compile avec : ./quanta exemples/bell.qta
+
+qubit q0;
+qubit q1;
+bit m0;
+bit m1;
+
+porte_h q0;
+porte_cnot q0, q1;
+mesurer q0 dans m0;
+mesurer q1 dans m1;
+afficher m0;
+afficher m1;

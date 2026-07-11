@@ -1,0 +1,86 @@
+/*
+ * LIRE_MOI.txt - TP1 : mini-langage quantique Quanta
+ * Cours INF4048 - methodologie Flex / Bison (seminaire traduction-compilation)
+ */
+
+================================================================================
+1. QU'EST-CE QUE CE PROJET ?
+================================================================================
+
+Quanta est un mini-langage pour decrire des circuits quantiques simples.
+Le compilateur lit un fichier source (.qta) et produit un fichier OpenQASM
+(sortie.qasm), sur le meme principe que le seminaire qui produit test.asm.
+
+Phases du compilateur :
+  - analyse lexicale   : analyseur_lexical.l   (outil Flex)
+  - analyse syntaxique : analyseur_syntaxique.y (outil Bison)
+  - analyse semantique : table_symboles.c
+  - generation de code : generation_code.c
+
+================================================================================
+2. INSTALLATION DES OUTILS (Ubuntu / Debian)
+================================================================================
+
+  sudo apt-get update
+  sudo apt-get install -y flex bison gcc make
+
+Verification :
+  flex --version
+  bison --version
+  gcc --version
+
+================================================================================
+3. COMPILATION DU COMPILATEUR
+================================================================================
+
+  cd TP1_langage_quantique
+  make
+
+Cela produit l'executable : quanta
+
+================================================================================
+4. EXECUTION
+================================================================================
+
+  ./quanta exemples/bell.qta
+  cat sortie.qasm
+
+  ./quanta exemples/portes.qta
+  cat sortie.qasm
+
+Ou en une commande :
+  make test
+
+================================================================================
+5. SYNTAXE DU LANGAGE QUANTA
+================================================================================
+
+Declarations :
+  qubit nom;
+  bit nom;
+
+Portes :
+  porte_h nom_qubit;
+  porte_x nom_qubit;
+  porte_y nom_qubit;
+  porte_z nom_qubit;
+  porte_cnot controle, cible;
+
+Mesure et affichage :
+  mesurer qubit dans bit;
+  afficher bit;
+
+Condition (sur un bit classique) :
+  si (bit == 0) alors
+    porte_x qubit;
+  fsi
+
+  si (bit == 1) alors
+    porte_h qubit;
+  fsi
+
+================================================================================
+6. NETTOYAGE
+================================================================================
+
+  make clean
